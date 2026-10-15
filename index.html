@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Me perdonas?</title>
+    <style>
+    html { box-sizing: border-box; font-size: 16px; }
+    *, *:before, *:after { box-sizing: inherit; }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+    }
+    .container {
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+        padding: 2vw;
+        margin: auto;
+    }
+    #mainImg {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        border-radius: 12px;
+    }
+    button {
+        padding: 0.7em 1.5em;
+        font-size: 1em;
+        margin: 0.5em;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 2px solid #FFC0CB;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    #siBtn { background-color: #009705; color: white; }
+    #noBtn { background-color: #FF5733; color: white; }
+    #siBtn:hover { background-color: #053a03; }
+    #noBtn:hover { background-color: #641e0d; }
+    #messageContainer {
+        font-size: 2em;
+        color: #FF0000;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        text-shadow: 2px 2px 4px #000;
+        animation: pulse 0.5s infinite alternate;
+        margin-top: 1em;
+        word-break: break-word;
+    }
+    h1#question {
+        font-size: 2em;
+        margin: 1em 0 0.5em 0;
+        word-break: break-word;
+    }
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.15); }
+    }
+    @media (max-width: 600px) {
+        .container { max-width: 98vw; }
+        #mainImg { max-width: 98vw; border-radius: 8px; }
+        h1#question { font-size: 1.3em; }
+        #messageContainer { font-size: 1.2em; }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="mainImg" src="IMG_0875.jpeg" alt="Mono triste">
+        <h1 id="question">¿Me perdonas?</h1>
+        <div id="messageContainer" style="display: none;"></div>
+        <button id="siBtn">Sí</button>
+        <button id="noBtn">No</button>
+    </div>
+    <script>
+    const noTexts = [
+        '¿Seguro que no me perdonas?',
+        '¿De verdad no puedes perdonarme?',
+        '¿Tan grave fue?',
+        '¿No hay esperanza para mí?',
+        'Por favor, piénsalo otra vez',
+        'Me haría muy feliz tu perdón',
+        'Si no me perdonas estaré muy triste',
+        'Mi corazón está dolido',
+        'Por favor, dame otra oportunidad',
+        'No quiero perderte',
+        'Vale, dejaré de insistir...',
+        'Es broma, ¡por favor perdóname!',
+        'Me siento muy mal por lo que hice',
+        '¿No hay forma de arreglarlo?',
+        'Por favor',
+        '¡Anda, perdónameeeeeeeee!',
+        'Por favooooooor, perdóname'
+    ];
+    let clicks = 0;
+    const siBtn = document.getElementById('siBtn');
+    const noBtn = document.getElementById('noBtn');
+
+    noBtn.addEventListener('click', function() {
+        noBtn.innerHTML = noTexts[clicks % noTexts.length];
+        noBtn.style.backgroundColor = '#F1330A';
+        const step = Math.min(clicks, 15);
+        siBtn.style.fontSize = (40 + step * 10) + 'px';
+        siBtn.style.padding = (20 + step * 10) + 'px ' + (40 + step * 10) + 'px';
+        clicks++;
+    });
+
+    siBtn.addEventListener('click', function() {
+        document.getElementById('mainImg').src = 'IMG_0876.jpeg';
+        document.getElementById('mainImg').alt = 'Mono feliz';
+        document.getElementById('question').style.display = 'none';
+        siBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+        const msg = document.getElementById('messageContainer');
+        msg.style.display = 'block';
+        msg.innerHTML = '¡Gracias por perdonarme! Prometo mejorar 💖';
+    });
+    </script>
+</body>
+</html>
